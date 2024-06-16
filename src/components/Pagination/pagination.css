@@ -1,0 +1,16 @@
+.pagination{
+  height: 40px;
+}
+
+.page{
+  background-color: #FFFFFF;
+  width: 48px;
+  height: 40px;
+  border-radius: 4px,0px,0px,4px;
+  border: 1px solid #E9ECEF;
+  padding: 12px,16px,12px,16px
+}
+
+.active{
+  background-color: #7749F8;
+}

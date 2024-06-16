@@ -1,0 +1,33 @@
+.form-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid #CED4DA;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+}
+.save-btn{
+  color: #ffffff;
+  background-color: #7749F8;
+  margin: 25px;
+  border: none;
+  border-radius: 4px;
+  height: 24px;
+  width: 120px;
+}
+.form-control{
+  height: 24px;
+  border: 1px solid #CED4DA;
+  border-radius: 4px;
+}
+
+.image{
+  height: 300px;
+  text-align: center;
+}

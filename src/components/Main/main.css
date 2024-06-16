@@ -1,0 +1,18 @@
+.Mainwrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  gap: 49px;
+  min-height: 900px;
+}
+.wrapper{
+  max-width: 800px;
+  min-height: 900px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
