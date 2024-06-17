@@ -1,13 +1,13 @@
 import { Card } from "@/types/types"
-import useFetchData from "../../Hooks/useFetchData"
 import { CardComponent } from "../Card/Card"
 import "./main.css"
-import usePagination from "@/Hooks/usePagination"
+import usePagination from "@/hooks/usePagination"
 import { Pagination } from "@/components/Pagination/Pagination"
 import { Form } from "../AddForm/Form"
+import { useAddForm } from "../AddForm/hooks/useAddForm"
 
 export const Main = ()=>{
-  const {data, setLocalItem} = useFetchData()
+  const {form, onSubmit, onChange, data } = useAddForm()
 
   const {
     firstContentIndex,
@@ -23,17 +23,18 @@ export const Main = ()=>{
   });
 
   return <div className="Mainwrapper">
-    <Form setLocalItem={setLocalItem}/>
+    <Form {...{form,onSubmit,onChange}}/>
     <div className="wrapper">
       {data
       .slice(firstContentIndex, lastContentIndex)
-      .map((item : Card, index: number)=> 
-        <CardComponent 
+      .map((item : Card)=> 
+        <CardComponent
+        id = {item.id}
         price={item.price} 
         description={item.description} 
         name={item.name} 
         image={item.image}
-        key={index} />)}
+        key={item.id} />)}
         <Pagination prevPage={prevPage} nextPage={nextPage} setPage={setPage} page={page} totalPages={totalPages}/>
       </div>
   </div>

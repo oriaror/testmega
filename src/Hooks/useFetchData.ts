@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Card } from "@/types/types"
-import initialData from "@/helpers/initialData"
+import { initialData } from "@/helpers"
 
 interface IFetchData {
   data: Card[],
@@ -13,14 +13,15 @@ const useFetchData = (): IFetchData => {
 
 
   const setLocalItem = (value: Card) => {
-    let prev = localStorage.getItem('data')
-    prev = JSON.parse(prev || '""')
-    console.log(prev)
-    const next: any = [...[prev], value].flat()
-    console.log(next)
-    localStorage.removeItem('data')
-    localStorage.setItem('data', JSON.stringify(next))
-    setData(next)
+    const temp = { ...value }
+    let oldData: Card[] = JSON.parse(localStorage.getItem('data') ?? '[]')
+
+    temp.image = `data:image/png;base64,${value.image}`
+
+    const newData: Card[] = [...oldData, temp]
+
+    localStorage.setItem('data', JSON.stringify(newData))
+    setData(newData)
   }
 
   const setInititalData = () => {
@@ -32,13 +33,18 @@ const useFetchData = (): IFetchData => {
     }
   }
 
-  useEffect(() => {
-    setInititalData()
-  }, [])
+  const readFromStaorage = () => {
+    const localData = localStorage.getItem('data')
+    console.log(localData, 'localData')
+    if (localData) {
+      console.log('qweqweqweqweqwe')
+      setData(JSON.parse(localData))
+    }
+  }
 
   useEffect(() => {
-    console.log(data)
-  }, [data])
+    readFromStaorage()
+  }, [])
 
   return { data, setLocalItem }
 }

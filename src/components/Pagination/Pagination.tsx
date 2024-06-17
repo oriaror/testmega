@@ -1,5 +1,6 @@
 import { IPagination } from "@/types/types"
 import './pagination.css'
+
 export const Pagination = ({prevPage, totalPages, setPage, nextPage, page}: IPagination) => {
   return <div className="pagination">
   <button onClick={prevPage} className="page">

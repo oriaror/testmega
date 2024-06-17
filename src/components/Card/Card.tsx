@@ -2,6 +2,7 @@ import { Card } from "../../types/types"
 import './card.css'
 
 export const CardComponent = ({name, description, image, price}: Card) => {
+
 return <div className="row">
 <div>
   <div className="card_wrapper">

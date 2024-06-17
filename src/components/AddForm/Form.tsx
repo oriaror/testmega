@@ -1,76 +1,66 @@
-import { Card } from "@/types/types";
-import { useEffect, useState } from "react";
+import { Card } from '@/types/types'
 import './form.css'
-import { useImageUpload } from "./ImageUpload/useImageUpload";
+
+
 
 type fucntionLocalItem = {
-  setLocalItem: (card: Card)=>void
+  form: Card,
+  onChange: (e: React.ChangeEvent<HTMLInputElement>)=>void,
+  onSubmit: ()=>void
 }
 
-export const Form = ({setLocalItem}:fucntionLocalItem) => {
-  const [img, setImg] = useImageUpload()
-  const [base64,setBase64] = useState(null|| '')
-
-
-  const [allValues, setAllValues] = useState({
-    name: '',
-    price: '',
-    description: '',
-    image: '',
- });
-  
- const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAllValues({...allValues, [e.target.name]: e.target.value})
- }
-
- useEffect(()=>{console.log(base64)},[base64])
-
+export const Form = ({form, onChange, onSubmit}: fucntionLocalItem) => {
 
  return (
   <div className="form-wrapper">
-
-
-   <input
+    <div>
+          <input
           type="file"
           name="image"
           id="file"
           accept=".jpg, .jpeg, .png"
-          onChange={changeHandler}
+          onChange={onChange}
+          className='image-control'
         />
-    <img width='300' height='300' src={base64 || ''} alt="kal"/>
-    <button onClick={()=> setBase64(`data:image;base64,${img}`)}>CLick</button>
-
-    
-
+        <div className='label-file'>
+        <div>+</div>
+        <label htmlFor='file' >Upload Image</label>
+        </div>
       <div className="form">
-        <p>Name</p>
+
+        <p className='input-title'>Name</p>
         <input type="text"
             className="form-control"
             id="name"
+            value={form.name}
             name="name"
             placeholder="Enter name"
-            onChange={changeHandler}
+            onChange={onChange}
     />
-        <p>Description</p>
+        <p className='input-title'>Description</p>
         <input type="text"
             className="form-control"
             id="description"
+            value={form.description}
             name="description"
             placeholder="Enter description"
-            onChange={changeHandler}
+            onChange={onChange}
     />
-        <p>Price</p>
-         <input type="text"
+        <p className='input-title'>Price</p>
+         <input type="number"
             className="form-control"
             id="price"
+            value={form.price}
             name="price"
             placeholder="Enter price"
-            onChange={changeHandler}
+            onChange={onChange}
     />
         </div>
-    <button className="save-btn" onClick={()=>setLocalItem(allValues)}>Save</button>
+        </div>
+    <button className="save-btn" onClick={()=>onSubmit()}>Save</button>
     </div>
  )
 }
+
 
     

@@ -31,3 +31,22 @@
   height: 300px;
   text-align: center;
 }
+
+.image-control {
+  visibility: hidden;
+}
+.label-file{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 1px dashed;
+  border-radius: 4px;
+  width: 334px;
+  height: 334px;
+  color: #6C757D;
+}
+.input-title{
+  font-weight: 600;
+  font-size: 20px;
+}

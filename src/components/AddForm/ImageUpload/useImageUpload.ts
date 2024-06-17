@@ -1,21 +1,28 @@
+import { stringifyBinaryFile } from "@/helpers/utils";
 import { useState } from "react"
-
 export const useImageUpload = () => {
-  const [base64Data, setBase64Data] = useState<any>(null)
 
-  const handleReaderLoaded = (e: any) => {
-    console.log("file uploaded 2: ", e);
-    let binaryString = e.target.result;
-    setBase64Data(btoa(binaryString))
-  };
+  const [fileString, setFileString] = useState<string | null>(null)
 
-  const onChange = (e: any) => {
-    let file = e.target.files[0]
+  const uploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null
+
     if (file) {
-      const reader = new FileReader();
-      reader.onload = handleReaderLoaded
+      const reader = new FileReader()
+
       reader.readAsBinaryString(file)
+
+      reader.onload = (fileEvent) => {
+        const res = stringifyBinaryFile(fileEvent.target?.result)
+        if (res) {
+          return setFileString(res)
+        }
+        return null
+      }
     }
   }
-  return [base64Data, onChange]
+  return {
+    fileString,
+    uploadFile
+  }
 }
