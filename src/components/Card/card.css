@@ -32,3 +32,29 @@
 .description{
   color: #68717A;
 }
+
+.hover-effect {
+  position:relative;
+}
+
+.hover-effect:hover .hide{
+  display: block;
+  opacity: 1;
+}
+
+.hover-effect:hover .image{
+  filter: brightness(45%);
+}
+
+.hide {
+  display: none;
+  position: absolute;
+  top: 50%;
+  bottom: 50%;
+  left:0;
+  right:0; 
+  margin: auto;
+  cursor: pointer;
+}
+
+

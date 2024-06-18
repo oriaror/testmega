@@ -3,7 +3,8 @@ export type Card = {
   name: string,
   description: string,
   image: string,
-  price: string
+  price: string,
+  onDelete?: (id: string) => void
 }
 
 export interface UsePaginationProps {

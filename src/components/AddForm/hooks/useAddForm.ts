@@ -4,26 +4,35 @@ import { useEffect, useState } from "react"
 import { useCardList } from "./useCardList"
 
 const initialForm = {
-  id: 'asijkn9182',
+  id: '',
   name: '',
   description: '',
   image: '',
-  price: ''
+  price: '',
+}
+
+type TinitialForm = {
+  id: string,
+  name: string,
+  description: string,
+  image: string,
+  price: string,
 }
 
 export const useAddForm = () => {
-  const [form, setForm] = useState<Card>(initialForm)
-  const { data, readFromStaorage } = useCardList()
-
+  const [form, setForm] = useState<TinitialForm>(initialForm)
+  const { data, readFromStaorage, onDelete } = useCardList()
 
   const onSubmit = () => {
+    console.log('submit')
     const temp = { ...form }
     let oldData: Card[] = JSON.parse(localStorage.getItem('data') ?? '[]')
     temp.image = `data:image/png;base64,${form.image}`
-    const newData: Card[] = [...oldData, temp]
+    const newData: TinitialForm[] = [...oldData, temp]
     localStorage.setItem('data', JSON.stringify(newData))
+    setForm({ ...initialForm, id: new Date().toISOString() })
     readFromStaorage()
-    setForm({ ...initialForm, id: String(data.length + 1) })
+
   }
 
   useEffect(() => {
@@ -54,10 +63,9 @@ export const useAddForm = () => {
       }
     }
 
-
     if (type === 'text' || type === 'number') {
       console.log(123)
-      newCardForm[name as Exclude<keyof Card, 'image'>] = e.target.value
+      newCardForm[name as Exclude<keyof Card, 'image' | 'onDelete'>] = e.target.value
 
       setForm(newCardForm)
     }
@@ -69,6 +77,7 @@ export const useAddForm = () => {
     form,
     onSubmit,
     onChange,
-    data
+    data,
+    onDelete
   }
 }

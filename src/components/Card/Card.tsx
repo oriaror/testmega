@@ -1,12 +1,15 @@
 import { Card } from "../../types/types"
 import './card.css'
 
-export const CardComponent = ({name, description, image, price}: Card) => {
+export const CardComponent = ({id, name, description, image, price, onDelete}: Card) => {
 
 return <div className="row">
 <div>
   <div className="card_wrapper">
-    <img className="image" src={image}/>
+    <div className="hover-effect">
+      <img className="image hover-effect" src={image}/>
+      <img className="hide" onClick={()=>{onDelete ? onDelete(id): null}} src="/images/pan.png"/>
+    </div>
     <div className="inner">
       <div className="price_wrapper">
       <p>{name}</p>
@@ -16,5 +19,6 @@ return <div className="row">
     </div>
   </div>
 </div>
+
 </div>
 }

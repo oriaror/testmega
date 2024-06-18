@@ -7,7 +7,7 @@ import { Form } from "../AddForm/Form"
 import { useAddForm } from "../AddForm/hooks/useAddForm"
 
 export const Main = ()=>{
-  const {form, onSubmit, onChange, data } = useAddForm()
+  const {form, onSubmit, onChange, data, onDelete } = useAddForm()
 
   const {
     firstContentIndex,
@@ -29,6 +29,7 @@ export const Main = ()=>{
       .slice(firstContentIndex, lastContentIndex)
       .map((item : Card)=> 
         <CardComponent
+        onDelete = {onDelete}
         id = {item.id}
         price={item.price} 
         description={item.description} 

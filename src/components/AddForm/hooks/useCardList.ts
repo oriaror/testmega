@@ -18,9 +18,18 @@ export const useCardList = () => {
     }
   }
 
+  const onDelete = (id: string) => {
+    const unFiltred: Card[] = JSON.parse(localStorage.getItem('data') || '""')
+    setData(unFiltred.filter(item => item.id !== id))
+    localStorage.setItem('data', JSON.stringify(unFiltred.filter(item => item.id !== id)))
+    console.log(unFiltred)
+    console.log(data)
+    console.log(id)
+  }
+
   useEffect(() => {
     readFromStaorage()
   }, [])
 
-  return { data, readFromStaorage }
+  return { data, readFromStaorage, onDelete }
 }
