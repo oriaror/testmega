@@ -7,7 +7,7 @@ import { Form } from "../AddForm/Form"
 import { useAddForm } from "../AddForm/hooks/useAddForm"
 
 export const Main = ()=>{
-  const {form, onSubmit, onChange, data, onDelete } = useAddForm()
+  const {form, onSubmit, onChange, data, onDelete, validation, disabled } = useAddForm()
 
   const {
     firstContentIndex,
@@ -22,8 +22,9 @@ export const Main = ()=>{
     count: data.length,
   });
 
-  return <div className="Mainwrapper">
-    <Form {...{form,onSubmit,onChange}}/>
+  return <div className="root">
+  <div className="Mainwrapper">
+    <Form {...{form,onSubmit,onChange,validation, disabled}}/>
     <div className="wrapper">
       {data
       .slice(firstContentIndex, lastContentIndex)
@@ -36,7 +37,8 @@ export const Main = ()=>{
         name={item.name} 
         image={item.image}
         key={item.id} />)}
-        <Pagination prevPage={prevPage} nextPage={nextPage} setPage={setPage} page={page} totalPages={totalPages}/>
       </div>
+  </div>
+    <Pagination prevPage={prevPage} nextPage={nextPage} setPage={setPage} page={page} totalPages={totalPages}/>
   </div>
 }

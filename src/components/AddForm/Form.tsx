@@ -2,19 +2,33 @@ import { Card } from '@/types/types'
 import './form.css'
 
 
-
 type fucntionLocalItem = {
   form: Card,
   onChange: (e: React.ChangeEvent<HTMLInputElement>)=>void,
-  onSubmit: ()=>void
+  onSubmit: ()=>void,
+  validation: (name:string)=> string,
+  disabled: boolean,
 }
 
-export const Form = ({form, onChange, onSubmit}: fucntionLocalItem) => {
 
+// const validation =(name : string) => {
+//   if(!name){
+//     return 'form-control'
+//   }
+//   if(name.length > 30){
+//     return 'form-control invalid'
+//   }
+//   if(name.length <= 30){
+//     return 'form-control valid'
+//   }
+// }
+
+export const Form = ({form, onChange, onSubmit, validation, disabled}: fucntionLocalItem) => {
  return (
   <div className="form-wrapper">
     <div>
           <input
+          maxLength={41}
           type="file"
           name="image"
           id="file"
@@ -23,14 +37,15 @@ export const Form = ({form, onChange, onSubmit}: fucntionLocalItem) => {
           className='image-control'
         />
         <div className='label-file'>
-        <div>+</div>
-        <label htmlFor='file' >Upload Image</label>
+        <label htmlFor='file' className='label'>+</label>
+        <label htmlFor='file' className='label'>Upload Image</label>
         </div>
       <div className="form">
 
         <p className='input-title'>Name</p>
         <input type="text"
-            className="form-control"
+            maxLength={41}
+            className={validation(form.name)}
             id="name"
             value={form.name}
             name="name"
@@ -39,7 +54,8 @@ export const Form = ({form, onChange, onSubmit}: fucntionLocalItem) => {
     />
         <p className='input-title'>Description</p>
         <input type="text"
-            className="form-control"
+            maxLength={41}
+            className={validation(form.description)}
             id="description"
             value={form.description}
             name="description"
@@ -47,8 +63,9 @@ export const Form = ({form, onChange, onSubmit}: fucntionLocalItem) => {
             onChange={onChange}
     />
         <p className='input-title'>Price</p>
-         <input type="number"
-            className="form-control"
+         <input type="text"
+            maxLength={41}
+            className={validation(form.price)}
             id="price"
             value={form.price}
             name="price"
@@ -57,7 +74,7 @@ export const Form = ({form, onChange, onSubmit}: fucntionLocalItem) => {
     />
         </div>
         </div>
-    <button className="save-btn" onClick={()=>onSubmit()}>Save</button>
+    <button className="save-btn" disabled={disabled} onClick={()=>onSubmit()}>Save</button>
     </div>
  )
 }

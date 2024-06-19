@@ -13,6 +13,7 @@
   flex-direction: column;
 }
 .save-btn{
+  cursor: pointer;
   color: #ffffff;
   background-color: #7749F8;
   margin: 25px;
@@ -21,10 +22,28 @@
   height: 24px;
   width: 120px;
 }
+
+.save-btn:hover {
+  background-color: #5c21ff;
+}
+
 .form-control{
+  outline:none;
   height: 24px;
   border: 1px solid #CED4DA;
   border-radius: 4px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type='number'],
+input[type="number"]:hover,
+input[type="number"]:focus {
+    appearance: none;
+    -moz-appearance: textfield;
 }
 
 .image{
@@ -34,7 +53,13 @@
 
 .image-control {
   visibility: hidden;
+  cursor: pointer;
 }
+
+.label{
+  cursor: pointer;
+}
+
 .label-file{
   display: flex;
   justify-content: center;
@@ -46,7 +71,21 @@
   height: 334px;
   color: #6C757D;
 }
+
 .input-title{
   font-weight: 600;
   font-size: 20px;
+}
+
+.invalid{
+  border: 1px solid #ff0000;
+  background-image: url('./images/invalid.png');
+  background-repeat: no-repeat;
+	background-position: center right 10px;
+}
+.valid{
+  border: 1px solid #008000;
+  background-image: url('./images/valid.png');
+  background-repeat: no-repeat;
+	background-position: center right 10px;
 }

@@ -21,8 +21,17 @@ type TinitialForm = {
 
 export const useAddForm = () => {
   const [form, setForm] = useState<TinitialForm>(initialForm)
+  const [disabled, setDisabled] = useState(true)
+
   const { data, readFromStaorage, onDelete } = useCardList()
 
+  useEffect(() => {
+    (form.description.length <= 30 && form.price.length <= 30 && form.name.length <= 30) &&
+      (form.description.length !== 0 && form.price.length !== 0 && form.name.length !== 0)
+      ? setDisabled(false) : setDisabled(true)
+  }, [form])
+
+  
   const onSubmit = () => {
     console.log('submit')
     const temp = { ...form }
@@ -34,10 +43,6 @@ export const useAddForm = () => {
     readFromStaorage()
 
   }
-
-  useEffect(() => {
-    console.log(initialForm)
-  }, [initialForm])
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target)
@@ -73,11 +78,27 @@ export const useAddForm = () => {
     return
   }
 
+  const validation = (name: string) => {
+    if (!name) {
+      return 'form-control'
+    }
+    if (name.length > 30) {
+      return 'form-control invalid'
+    }
+    if (name.length <= 30) {
+      return 'form-control valid'
+    }
+    return ''
+  }
+
+
   return {
     form,
     onSubmit,
     onChange,
     data,
-    onDelete
+    onDelete,
+    validation,
+    disabled
   }
 }

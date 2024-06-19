@@ -1,3 +1,11 @@
+.root{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .Mainwrapper{
   display: flex;
   justify-content: center;
@@ -7,12 +15,10 @@
   gap: 49px;
   min-height: 900px;
 }
-.wrapper{
+ .wrapper{
   max-width: 800px;
   min-height: 900px;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
   gap: 24px;
-}
+} 
