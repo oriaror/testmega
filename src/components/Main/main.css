@@ -22,3 +22,11 @@
   flex-wrap: wrap;
   gap: 24px;
 } 
+
+.cards-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 16px;
+}

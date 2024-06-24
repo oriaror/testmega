@@ -5,6 +5,7 @@ import usePagination from "@/hooks/usePagination"
 import { Pagination } from "@/components/Pagination/Pagination"
 import { Form } from "../AddForm/Form"
 import { useAddForm } from "../AddForm/hooks/useAddForm"
+import { Chat } from "../Chat/Chat"
 
 export const Main = ()=>{
   const {form, onSubmit, onChange, data, onDelete, validation, disabled } = useAddForm()
@@ -25,6 +26,7 @@ export const Main = ()=>{
   return <div className="root">
   <div className="Mainwrapper">
     <Form {...{form,onSubmit,onChange,validation, disabled}}/>
+    <div className="cards-wrapper">
     <div className="wrapper">
       {data
       .slice(firstContentIndex, lastContentIndex)
@@ -38,7 +40,9 @@ export const Main = ()=>{
         image={item.image}
         key={item.id} />)}
       </div>
+      <Pagination prevPage={prevPage} nextPage={nextPage} setPage={setPage} page={page} totalPages={totalPages}/>
+      </div>
+      <Chat/>
   </div>
-    <Pagination prevPage={prevPage} nextPage={nextPage} setPage={setPage} page={page} totalPages={totalPages}/>
   </div>
 }
