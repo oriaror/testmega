@@ -1,46 +1,15 @@
-import { useEffect, useState } from "react"
 import './chat.css'
-
-const initialQuestions = ['Сколько тебе лет?', 'Как тебя зовут?', 'Кто ты по национальности?']
-
-
-const checkMessage = (index : number)=>{
-  return index % 2 ===0 ? 'list-item' : 'list-item-answ'
-}
-
-const checkTextArea = (string : string) =>{
-  return string.length ? 'text-area' : 'text-area-red'
-}
+import { checkMessage } from "@/helpers/checkMessage"
+import { checkTextArea } from "@/helpers/checkTextArea"
+import { Message } from "./Message"
+import { useChatControl } from './hooks/useChatControl'
 
 export const Chat = () =>{
-  const [messages, setMessages] = useState<string[]>([])
-  const [textArea, setTextArea] = useState('')
-  const [count, setCount] = useState(0)
-
-  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>)=>{
-    setTextArea(e.target.value)
-  }
-  const sendAnswer = (textArea:string)=>{
-    setMessages([...messages, textArea])
-    setCount((prev)=>prev +1)
-    localStorage.setItem('answer', JSON.stringify([...messages, textArea]) )
-    setTextArea('')
-  }
-
-  useEffect(()=>{
-    if(!initialQuestions[count]){
-      console.log(123)
-      setMessages([...messages, 'У меня больше нет вопросов'])
-      return
-    }
-    setMessages([...messages, initialQuestions[count]])
-  },[count])
-
-
+  const {messages, textArea, onChange, sendAnswer} = useChatControl()
   return (
     <div className="wrapper-chat">
       <ul className="list">
-        {messages.map((item,index)=> <li key={index} className={checkMessage(index)}><p>{item}</p></li>)}
+        {messages.map((item,index)=> <Message item={item} index={index} checkMessage={checkMessage}/>)}
       </ul>
       <div className="send-message">
       <textarea className={checkTextArea(textArea)} value={textArea} onChange={onChange}>Type your answer</textarea>
