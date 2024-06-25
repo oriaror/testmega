@@ -23,6 +23,7 @@ export const Chat = () =>{
   const sendAnswer = (textArea:string)=>{
     setMessages([...messages, textArea])
     setCount((prev)=>prev +1)
+    localStorage.setItem('answer', JSON.stringify([...messages, textArea]) )
     setTextArea('')
   }
 
